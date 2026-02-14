@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>om younis ❤️ Yoooooota</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;700&display=swap" rel="stylesheet">
+<style>
+body{
+  margin:0;
+  font-family:'Cairo',sans-serif;
+  background: linear-gradient(135deg,#ff9a9e,#fad0c4,#fbc2eb,#a18cd1);
+  color:#222;
+  text-align:center;
+  overflow-x:hidden;
+}
+
+/* خلفية نجوم */
+.stars{
+  position:fixed;top:0;left:0;width:100%;height:100%;
+  background:transparent url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="2" height="2"><circle cx="1" cy="1" r="1" fill="white"/></svg>') repeat;
+  animation: twinkle 10s linear infinite; z-index:-1;
+}
+@keyframes twinkle{0%{background-position:0 0;}100%{background-position:1000px 1000px;}}
+
+/* اسم خلفية متحرك */
+.background-text{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);font-size:90px;opacity:0.05;white-space:nowrap;animation:move 30s linear infinite;color:#ffeb3b;text-shadow:0 0 30px #ff5722; z-index:-1;}
+@keyframes move{0%{transform:translate(-50%,-50%) translateX(-100%);}100%{transform:translate(-50%,-50%) translateX(100%);}}
+
+/* شاشة الدخول */
+.card{width:90%;max-width:650px;margin:50px auto;padding:40px;background:rgba(255,255,255,0.7);border-radius:25px;box-shadow:0 0 60px rgba(255,193,7,0.5);transition:0.5s;opacity:0;transform:scale(0.9);}
+.card.show{opacity:1;transform:scale(1);transition:1s;}
+input{width:80%;padding:12px;margin:10px;border-radius:10px;border:2px solid #ff4081;outline:none;}
+button{padding:12px 30px;border-radius:30px;border:none;background:#ff4081;color:white;cursor:pointer;transition:0.3s, box-shadow 0.5s;}
+button:hover{transform:scale(1.05);background:#f50057;}
+.hidden{display:none;}
+
+/* قلوب متحركة */
+.hearts{position:fixed;bottom:-10px;font-size:20px;animation:float 6s linear infinite;color:#ff1744;}
+@keyframes float{0%{transform:translateY(0);}100%{transform:translateY(-100vh);}}
+
+/* عداد */
+.counter{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:20px;}
+.box{background:rgba(255,255,255,0.6);padding:15px;border-radius:15px;font-weight:bold;font-size:16px;color:#000;}
+
+/* الرسالة */
+.message{margin-top:20px;font-size:18px;min-height:80px;line-height:1.8;text-shadow:0 0 5px #ff1744;}
+
+/* الهدايا */
+.gifts{display:flex;flex-direction:column;align-items:center;gap:15px;margin-top:20px;margin-bottom:50px;}
+.gift-btn{width:70%;padding:15px 0;border:none;border-radius:15px;background:#ff4081;color:white;cursor:pointer;font-size:20px;text-shadow:0 0 5px #fff;box-shadow:0 0 10px #ff4081,0 0 20px #ffeb3b,0 0 30px #f50057;animation:neonGlow 2s ease-in-out infinite alternate, floatBtn 3s ease-in-out infinite alternate;}
+.gift-btn:hover{transform:scale(1.1);box-shadow:0 0 20px #ffeb3b,0 0 40px #ff4081,0 0 60px #f50057;}
+@keyframes floatBtn{0%{transform:translateX(0);}50%{transform:translateX(10px);}100%{transform:translateX(0);}}
+@keyframes neonGlow{0%{box-shadow:0 0 10px #ff4081,0 0 20px #ffeb3b,0 0 30px #f50057;}50%{box-shadow:0 0 20px #ff4081,0 0 30px #ffeb3b,0 0 50px #f50057;}100%{box-shadow:0 0 10px #ff4081,0 0 20px #ffeb3b,0 0 30px #f50057;}}
+
+/* محتوى الهدايا */
+.gift-content{margin-top:10px;padding:15px;width:70%;background:rgba(255,255,255,0.6);border-radius:15px;display:none;transform-origin:top;animation:flipIn 0.5s ease forwards;color:#000;text-align:center;box-shadow:0 0 20px #ff4081,0 0 40px #ffeb3b,0 0 60px #f50057;}
+.gift-content video,img{width:100%;border-radius:15px;box-shadow:0 0 20px #ff4081,0 0 40px #ffeb3b,0 0 60px #f50057;}
+@keyframes flipIn{0%{transform:rotateX(-90deg);opacity:0;}100%{transform:rotateX(0deg);opacity:1;}}
+</style>
+</head>
+<body>
+
+<div class="stars"></div>
+<div class="background-text">Yoooooota ❤️ Yoooooota ❤️ Yoooooota</div>
+
+<div class="card show" id="login">
+<h2>نورتي حياتي ❤️ ادخلي وشوفي قلبي شايل ايه جوه</h2>
+<input type="text" id="user" placeholder="Username">
+<input type="password" id="pass" placeholder="Password">
+<br>
+<button onclick="login()">دخول</button>
+</div>
+
+<div class="card hidden" id="main">
+<h2>om younis 💖</h2>
+
+<div class="counter">
+<div class="box" id="years">0 سنين</div>
+<div class="box" id="months">0 شهر</div>
+<div class="box" id="weeks">0 أسبوع</div>
+<div class="box" id="days">0 يوم</div>
+<div class="box" id="hours">0 ساعة</div>
+<div class="box" id="minutes">0 دقيقة</div>
+<div class="box" id="seconds">0 ثانية</div>
+</div>
+
+<div class="message" id="text"></div>
+
+<audio id="song" src="song.mp3" loop></audio>
+<button onclick="toggleMusic()" id="musicBtn">🔊 إيقاف الموسيقى</button>
+
+<h3 style="margin-top:30px;">🎁 هدايا لك 💖</h3>
+<div class="gifts">
+  <button class="gift-btn" id="btn1" onclick="openGiftSequential(1)">📦 دي لقلبي</button>
+  <div id="gift1" class="gift-content"><img src="photo1.jpg"></div>
+
+  <button class="gift-btn hidden" id="btn2" onclick="openGiftSequential(2)">📦 دي لعمري</button>
+  <div id="gift2" class="gift-content"><img src="photo2.jpg"></div>
+
+  <button class="gift-btn hidden" id="btn3" onclick="openGiftSequential(3)">📦 ودي لحياتي</button>
+  <div id="gift3" class="gift-content"><img src="photo3.jpg"></div>
+
+  <button class="gift-btn hidden" id="btn4" onclick="openGiftSequential(4)">📦 ودي لعشقي</button>
+  <div id="gift4" class="gift-content"><img src="photo4.jpg"></div>
+
+  <button class="gift-btn hidden" id="btn5" onclick="openGiftSequential(5)">📦 ووحدة كمان لنبض روحي</button>
+  <div id="gift5" class="gift-content"><img src="photo5.jpg"></div>
+
+  <button class="gift-btn hidden" id="btn6" onclick="openGiftSequential(6)">📦 ودي لعيوني</button>
+  <div id="gift6" class="gift-content"><img src="photo6.jpg"></div>
+
+  <button class="gift-btn hidden" id="btn7" onclick="openGiftSequential(7)">📦 معلش دي لشريكة حياتي</button>
+  <div id="gift7" class="gift-content"><img src="photo7.jpg"></div>
+
+  <button class="gift-btn hidden" id="btn8" onclick="openGiftSequential(8)">📦 ودي لملاكي</button>
+  <div id="gift8" class="gift-content"><p>وجودك في حياتي هو كل حاجة حلوة ❤️</p></div>
+</div>
+
+<br>
+<!-- زر الفيديو -->
+<button class="gift-btn" id="videoBtn" onclick="openVideo()">🎬 المفاجئة الأخيرة (دي لحبي الوحيد)</button>
+
+<div id="videoContainer" class="gift-content" style="display:none;margin-top:15px;">
+  <h3>دي لحبي الوحيد ❤️</h3>
+  <video id="bigVideo" controls>
+    <source src="video1.mp4" type="video/mp4">
+  </video>
+</div>
+
+<audio id="popSound" src="pop.mp3"></audio>
+
+<script>
+function login(){
+let username=document.getElementById("user").value.trim();
+let password=document.getElementById("pass").value.trim();
+if(username==="om younis" && password==="20223"){
+document.getElementById("login").classList.add("hidden");
+document.getElementById("main").classList.remove("hidden");
+document.getElementById("main").classList.add("show");
+startMusic();
+typeMessage();
+startCounter();
+createHeart();
+}else{alert("حاولي تاني يا قلبي ❤️");}
+}
+
+function typeMessage(){
+let msg="من أول يوم عيني شافت عينك وأنا عرفت إن حياتي بدأت بجد... وجودك هو الأمان، هو الراحة، هو كل حاجة حلوة في الدنيا ❤️";
+let i=0;
+function typing(){if(i<msg.length){document.getElementById("text").innerHTML+=msg.charAt(i);i++;setTimeout(typing,50);}}
+typing();
+}
+
+function createHeart(){
+setInterval(()=>{var heart=document.createElement("div");heart.classList.add("hearts");heart.innerHTML="❤";heart.style.left=Math.random()*100+"vw";heart.style.animationDuration=(Math.random()*3+3)+"s";document.body.appendChild(heart);setTimeout(()=>{heart.remove();},6000);},400);
+}
+
+var audio=document.getElementById("song");
+function startMusic(){audio.volume=0;audio.play();let fade=setInterval(()=>{if(audio.volume<1){audio.volume+=0.05;}else{clearInterval(fade);}},200);}
+function toggleMusic(){if(audio.paused){audio.play();document.getElementById("musicBtn").innerHTML="🔊 إيقاف الموسيقى";}else{audio.pause();document.getElementById("musicBtn").innerHTML="▶ تشغيل الموسيقى";}}
+
+function startCounter(){let startDate=new Date("2023-02-02T00:00:00");function updateCounter(){let now=new Date();let diff=now-startDate;let seconds=Math.floor(diff/1000);let minutes=Math.floor(seconds/60);let hours=Math.floor(minutes/60);let days=Math.floor(hours/24);let weeks=Math.floor(days/7);let months=Math.floor(days/30);let years=Math.floor(days/365);
+document.getElementById("years").innerHTML=years+" سنين";document.getElementById("months").innerHTML=months+" شهر";document.getElementById("weeks").innerHTML=weeks+" أسبوع";document.getElementById("days").innerHTML=days+" يوم";document.getElementById("hours").innerHTML=hours+" ساعة";document.getElementById("minutes").innerHTML=minutes+" دقيقة";document.getElementById("seconds").innerHTML=seconds+" ثانية";}
+updateCounter();setInterval(updateCounter,1000);}
+
+var popSound=document.getElementById("popSound");
+function openGiftSequential(num){
+let gift=document.getElementById("gift"+num);
+gift.style.display='block';
+popSound.currentTime=0;popSound.play();
+if(num<8){document.getElementById("btn"+(num+1)).classList.remove("hidden");}
+document.getElementById("btn"+num).disabled=true;
+}
+
+function openVideo(){
+let container=document.getElementById("videoContainer");
+container.style.display="block";
+let video=document.getElementById("bigVideo");
+video.play();
+video.scrollIntoView({behavior:"smooth"});
+}
+</script>
+</body>
+</html>
